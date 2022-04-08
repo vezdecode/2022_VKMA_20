@@ -1,6 +1,6 @@
-# MINI-APP - 10
+# MINI-APP - 20
 - Команда: tipatima
-- Задание: mini-app - 10 баллов
+- Задание: mini-app - 20 баллов
 ## How to run
 Зайти в VK Mini App: 
 
