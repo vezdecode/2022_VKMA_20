@@ -7,8 +7,8 @@ https://vk.com/app8131169
 
 Или запустить локально. Сервер будет развёрнут на http://localhost:3000
 ```
-npm install
-npm start
+yarn
+yarn dev
 ```
 ## Contacts
 - Вконтакте - [Артём Пивко](https://vk.com/xmarburx)
