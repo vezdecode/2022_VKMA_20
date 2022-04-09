@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '../../components/Button';
 import { screens } from '../../shared/types/game';
 
 const GamePage = (): JSX.Element => {
 	const [currentPlayer, setCurrentPlayer] = useState<number>(0);
+	const [playersCount, setPlayersCount] = useState<number>(0);
 	const [screen, setScreen] = useState<screens>('common');
-	const players = JSON.parse(localStorage.getItem('players'));
+	const [players, setPlayers] = useState<boolean[]>([]);
 	
+	useEffect(() => {
+		if (localStorage.getItem('playersCount'))
+			setPlayersCount(Number(localStorage.getItem('playersCount')));
+
+		if (localStorage.getItem('players'))
+			setPlayers(JSON.parse(localStorage.getItem('players')));
+	}, []);
+
 	const newPlayer = () => {
-		if ((currentPlayer + 1) < localStorage.playersCount) {
+		if ((currentPlayer + 1) < playersCount) {
 			setCurrentPlayer(currentPlayer+1);
 			setScreen('common');
 		}
@@ -37,7 +46,7 @@ const GamePage = (): JSX.Element => {
 						<p className='font-semibold text-xl'>
 							{players[currentPlayer] ? 
 								(`Ты шпион. Не раскрой себя! Твоя задача выжить всего 
-									${localStorage.playersCount} минут, ты справишься!`) 
+									${playersCount} минут, ты справишься!`) 
 								: (`Ты обычный житель. Твоя задача максимально быстро раскрыть шпиона и выиграть игру. 
 								Локация: Казино`)}
 						</p>
@@ -56,7 +65,7 @@ const GamePage = (): JSX.Element => {
 					</div>
 				);
 		};
-	}
+	};
 
 	return(
 		<div className='p-8'>
@@ -65,7 +74,7 @@ const GamePage = (): JSX.Element => {
 					Находка для шпиона!
 					{' '}
 					<span className='text-staticPrimary font-bold'>
-						{localStorage.playersCount}
+						{playersCount}
 						{' '}
 						игроков
 					</span>
